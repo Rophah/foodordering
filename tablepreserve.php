@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$output = $sql->inserttable($firstname, $lastname, $phone, $email,$guest,$reservetype, $reservedate, $reservetime,$reservedspecial, $id);
 			echo $output;
 			
-			header("Location: response.php");
+			echo "<span class='text-danger'>Table has been reserved. Hurray!!!</span>";
 		exit;
 		}
 

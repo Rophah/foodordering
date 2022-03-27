@@ -230,7 +230,7 @@ include_once("navbar.php");
 	<!-- JS FILES -->
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/popper.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function(){

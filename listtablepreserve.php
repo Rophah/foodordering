@@ -50,7 +50,7 @@ $result = $sql->listreserve();
 					<th><?php echo $value['reservetime']?></th>
 					<th><?php echo $value['specialrequest']?></th>
 					<th><?php echo $value['status']?></th>
-					<th><a href="admineditreserve.php?id=<?php echo $id; ?>" class='btn-primary btn-sm mb-2'>Edit</a></th>
+					<th><a href="admineditreserve2.php?id=<?php echo $id; ?>" class='btn-primary btn-sm mb-2'>Edit</a></th>
 					</tr>
 					<?php
 					}

@@ -22,7 +22,7 @@ $res = $sql->localdish();
 		</style>
 	</head>
 <body>
-<div class="container">
+<div class="container" id="#modaldata">
 	<h2 class="mt-4 mb-3">Available deliciously made local dishes </h2>
 	
 		<?php
@@ -52,7 +52,7 @@ $res = $sql->localdish();
 			<div class="modal-content">
 			  <div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel">Food details</h5>
-				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+				<button type="button?id=<?php echo $value['idfood'] ?>" class="close"  data-bs-dismiss="modal" aria-label="Close">
 				  <span aria-hidden="true">&times;</span>
 				</button>
 			  </div>
@@ -60,18 +60,21 @@ $res = $sql->localdish();
 				<!-- Your code goes here-->
 				<div class="container">
 					<div class="row">
+						<div id="result"></div>
 						<div class="col-md-5">
 						<?php echo $value['foodtitle']; ?>	
 						</div>
 						 
-							<div class="col-md-7">
-						 	<?php echo $value['foodprice']; ?>
-							</div>
-
-						 	<button type="button" onclick="decrement()">-</button>
-							<input type="number" name="num" id="demoinput" min="0">
-							<button type="button" onclick="increment()">+</button>
-							
+						<div class="col-md-7" id="price">
+					 	<?php echo $value['foodprice']; ?>
+						</div>
+						<div class="col-5 offset-3" >
+							<h5 id="value"></h5>
+						 	<button type="button" class="btn btn-primary" id="btn1" onclick="decrement(this)">-</button>
+							<input type="number" name="num" id="demoInput" min="0">
+							<button type="button" id="btn1" class="btn btn-primary" onclick="increment(this)">+</button>
+							<button type="button"class="btn btn-primary"  id="button" name="btn">Submit</button>
+						</div>
 					</div>
 					
 				</div>
@@ -104,14 +107,50 @@ $res = $sql->localdish();
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<script type="text/javascript" src="js/popper.min.js"></script>
 	<script type="text/javascript">
-		function increment(){
-			document.getElementById('demoinput').stepUp();
+		$(document).ready(function(){
+			$('#button').click(function(){
+				var quantity = $('#demoInput').val();
+				var price = $('#price').val();
+				var result = quantity * price;
+				$('#value').text(result);
+				console.log(result)
+			})
+		})
+
+		function increment(element){
+			element.previousElementSibling.stepUp();
 
 		}
-		function decrement(){
-			document.getElementById('demoinput').stepDown();
+		function decrement(element){
+			element.nextElementSibling.stepDown();
 
 		}
+
+		// $document.ready(function(){
+		// 	$('#btn1').change(function(){
+
+		// 		var formdata = $('#modaldata').serialize();
+		// 		alert(formdata); 
+
+		// 	$.ajax({
+		// 		url:"insertdish.php",
+		// 		type:"POST",
+		// 		data: formdata,
+		// 		success: function(res){
+		// 			$('#message').html(res);
+		// 		}
+		// 	})
+		// })
+		
+		// $(document).ready(function(){
+		// 	$('#demoInput').change(function(){
+		// 		var quantity = $(this).val();
+		// 		var price = $(this).text();
+		// 		var result = quantity * price;
+		// 		$('#value').append(result); 
+		// 	})
+		// })
+
 		
 	</script>
 </body>
