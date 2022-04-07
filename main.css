@@ -1,6 +1,6 @@
-body {
+/*body {
   font-family: "Montserrat", sans-serif;
-}
+}*/
 a {
   text-decoration: none;
   color: black;
@@ -57,7 +57,7 @@ a:hover {
 
 /* ================= Main page ==============*/
 #foodsearch {
-  height: 100vh;
+  height: 90vh;
   background-image: url(images/friedrice.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -65,7 +65,7 @@ a:hover {
 }
 .overlay {
   background-color: rgba(0, 0, 0, 0.5);
-  height: 100vh;
+  height: 90vh;
 }
 .maintext {
   margin: 15% 20%;
@@ -73,6 +73,8 @@ a:hover {
 .hungry {
   color: red;
   font-weight: 600;
+  font-size: 60px;
+  font-style: italic;
 }
 .navlinkcol {
   color: #fff;

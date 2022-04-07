@@ -1,5 +1,5 @@
 <?php
-include('constants.php');
+include_once('constants.php');
 class Food{
 
 	public $firstname;
@@ -24,8 +24,7 @@ class Food{
 		if($category_image != false){
 			$sql = "INSERT INTO category SET category_type='$category_type' , category_image= '$category_image' ";
 
-			// var_dump($sql);
-			// exit;
+			
 			$result = $this->dbconnect->query($sql);
 
 			if($this->dbconnect->affected_rows == 1){
@@ -340,7 +339,140 @@ class Food{
 	}
 	//end of get snacks
 	
+	//search for food
+	public function searchforfood($searchfood){
+		$sql = "SELECT * FROM food";
 
+		$result = $this->dbconnect->query($sql);
+
+		$row = [];
+		if($this->dbconnect->affected_rows >0){
+			while($rec = $result->fetch_assoc()){
+				$row[] = $rec;
+			}return $row;
+		}else{
+			return $row;
+		}
+	}
+
+	
+	function addcart($idcustomer,$idfood,$quantity){
+		//write query
+
+		$sql = "INSERT INTO cart SET idcustomer='$idcustomer', idfood = '$idfood', quantity='$quantity'";
+
+
+		$result = $this->dbconnect->query($sql);
+		
+		if($this->dbconnect->affected_rows == 1){
+			return true;
+			//return $result;
+		}else{
+			return false;
+		}
+
+	}
+
+	
+	public function selectallfromcart($id){
+		$sql = "SELECT * FROM cart JOIN food ON cart.idfood=food.idfood WHERE idcustomer= '$id' && status = 'pending'";
+
+		$result = $this->dbconnect->query($sql);
+		
+		$row = [];
+		if($this->dbconnect->affected_rows > 0){
+			while($rec= $result->fetch_assoc()){
+				$row[] = $rec;
+			}return $row;
+		}else{
+			return $row;
+		}
+
+	}
+	
+	function getAllEmail($id){
+		$sql = "SELECT * FROM user WHERE idcustomer= '$id'";
+		$result = $this->dbconnect->query($sql);
+
+		if($this->dbconnect->affected_rows > 0){
+			$rows = $result->fetch_assoc();
+			$email = $rows['emailaddress'];
+			return $email;
+		}else{
+			return false;
+		}
+	}
+
+	//begin initialize paystack transaction
+		public function initializePaystack($amount,$email,$reference){
+
+			$url = "https://api.paystack.co/transaction/initialize";
+			$callbackurl = "http://localhost/champ/paystackcallback.php";
+
+			$fields = [
+					'email' => $email,
+					'amount' => $amount * 100,
+					'reference' => $reference,
+					'callback_url' => $callbackurl
+				];
+
+			$fields_string = http_build_query($fields);
+
+			//step 1: open connection
+			$fp= curl_init();
+
+			//step 2: set curl options
+			//set the url, number of POST vars, POST data
+			  curl_setopt($fp,CURLOPT_URL, $url);
+			  curl_setopt($fp,CURLOPT_POST, true);
+			  curl_setopt($fp,CURLOPT_POSTFIELDS, $fields_string);
+			  curl_setopt($fp, CURLOPT_HTTPHEADER, array(
+			    "Authorization: Bearer sk_test_69520e61c410b160d867ff23b79c839122387d6d",
+			    "Cache-Control: no-cache",
+			));
+			  curl_setopt($fp, CURLOPT_SSL_VERIFYPEER, false);
+			  curl_setopt($fp, CURLOPT_RETURNTRANSFER, true);
+
+			  //step 3: execute the curl session
+
+				$result= curl_exec($fp);
+
+				//check if there is error
+
+				if(curl_error($fp)){
+					var_dump(curl_error($fp));
+				}
+
+				//step 4: close curl session
+
+				curl_close($fp);
+
+				//step 5: convert json to array
+				$response = json_decode($result, true);
+				return $response;
+		}
+	//end initialize paystack transaction
+	
+	//begin insert transaction details
+		public function insertTransDetails($amount, $productid, $userid, $transref){
+
+				$sql = "INSERT INTO payment SET transactionamount = '$amount', idfood='$productid',
+				idcustomer = '$userid' , transactionstatus='pending', trans_reference = '$transref'";
+
+				//run the query
+				//var_dump($sql);
+
+				$result = $this->dbconnect->query($sql);
+
+				if($this->dbconnect->affected_rows == 1){
+					return true;
+				}else{
+					return false;
+				}
+			
+		}
+
+	//end transaction details
 
 }
 ?>

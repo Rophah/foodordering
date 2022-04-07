@@ -20,7 +20,7 @@ class Admin {
 			$emblem = $this->uploadFile();
 			if ($emblem != false){
 
-				// $sql = "INSERT INTO admin(fname,lname,email,dateofbirth,phonenumber,adminpicture,password) VALUES ('$fname','$lname','$email','$dateofbirth','$phonenumber','$adminpicture','$password')";
+				$password = password_hash($password,PASSWORD_DEFAULT);
 				$sql= "INSERT INTO admin SET fname='$fname',lname='$lname',email='$email',dateofbirth= '$dateofbirth',phonenumber = '$phonenumber',adminpicture='$emblem',password='$password'";
 
 
@@ -30,7 +30,7 @@ class Admin {
 				if($this->dbcon->affected_rows == 1){
 					session_start();
 					$_SESSION['email']=$email;
-					$_SESSION['orptiyek'] = "onlineordering";
+					$_SESSION['orptiyek'] = "adminonlineordering";
 					return true;
 				}else{
 					return false;
@@ -116,6 +116,7 @@ class Admin {
 
 	//login admin
 	public function login($email,$password){
+		$password = password_hash($password, PASSWORD_DEFAULT);
 		$sql = "SELECT * FROM admin WHERE emailaddress = '$email' && password = '$password' ";
 
 		$result = $this->dbcon->query($sql);
@@ -128,11 +129,16 @@ class Admin {
 
 		$rows= $result->fetch_assoc();
 
-		if($result->num_rows == 1){
+		if($this->dbcon->affected_rows == 1){
 			return $rows;
 		} else{
 			return $rows;
-		}		
+		}
+		session_start();
+		$_SESSION['mylogchecker'] = "Rt_0_0_0)_rab";
+		$_SESSION['email'] = $email;
+		$_SESSION['fname'] = $rows['fname'];
+		
 	}
 
 	

@@ -1,5 +1,11 @@
 <?php
-	include_once("frontheader.php");
+
+session_start();
+if(!isset($_SESSION['orptiyek']) && !isset($_SESSION['email'])){
+  header("Location: adminlogin.php?msg=Please login to continue ");
+exit;
+}
+	include_once("adminnavbar.php");
 	include_once('classes/fooduser.php');
 
 	$sql = new Food;

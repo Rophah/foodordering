@@ -1,5 +1,6 @@
 <?php
-  include_once("frontheader.php");
+
+  include_once("adminnavbar.php");
   include_once("classes/fooduser.php");
   $newobj = new Food;
   $result=$newobj->category();
@@ -15,17 +16,17 @@
       <div class="col-md-3 ">
         <div class="list-group">
           <a href="addproduct.php" class="list-group-item ">Add product</a>
-          <a href="listfood.php" class="list-group-item ">List available food</a>
-          <a href="admineditfood.php" class="list-group-item ">Edit product</a>
-          <a href="" class="list-group-item ">Order</a>
-          <a href="" class="list-group-item ">Delivery</a>
-          <a href="adminlogoutfood.php" class="list-group-item ">Log out</a>
+        <a href="listfood.php" class="list-group-item ">List available food</a>
+        <a href="admineditfood.php" class="list-group-item ">Edit product</a>
+        <a href="listtablepreserve.php" class="list-group-item ">List of reserved table</a>
+        <a href="admineditreserve2.php" class="list-group-item ">Edit reserved table</a>
+        <a href="insertcategory.php" class="list-group-item ">Insert new food category</a>
+        <a href="" class="list-group-item ">Delivery</a>
+        <a href="logoutfood.php" class="list-group-item ">Log out</a>
         </div>
       </div>
       <div class="col-md-6 mb-4">
-        <h1 class="mt-4 mb-3">Add Product page
-      
-      </h1>
+
         <?php
 
         if(isset($_POST['submit'])){
@@ -58,6 +59,10 @@
         }
 
         ?>
+        <h1 class="mt-4 mb-3">Add Product page
+      
+      </h1>
+        
 
         <form name="" id="registerform" action='' method="post" enctype="multipart/form-data">
           <div class="control-group form-group">
@@ -97,7 +102,7 @@
             </div>
           </div>
          <!-- <p class="help-block text-muted">We promise never to spam you!</p> -->
-         <div class="control-group form-group">
+         <div class="control-group form-group mt-3">
             <div class="controls">
               <label>Food image</label>
               <input type="file" class="form-control" id="foodimage" name='foodimage' value="<?php

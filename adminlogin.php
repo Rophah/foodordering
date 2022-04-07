@@ -1,5 +1,5 @@
 <?php
-	include_once("frontheader.php");
+	include_once("navbarheader.php");
 	include_once("classes/adminuser.php");
 
 ?>
@@ -52,14 +52,14 @@
 	
 	
     <div class="row">
-    	<div class="col-md-5" >
+    	<div class="col-md-5 col-sm-3" >
     		<div class="upperoutline">
-    			<img src="images/signup.jpg" class="imgoutline" >
+    			<img src="images/signup.jpg" class="" >
     			<div class="imgborder"></div>
     		</div>
     		
     	</div>
-    	<div class="col-md-5 offset-2 justify-align-center">
+    	<div class="col-md-5 offset-1">
     		<h1 class="mt-4 mb-3">Administrator page
       			<small>Login</small>
     		</h1>

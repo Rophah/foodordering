@@ -1,6 +1,7 @@
 <?php 
+
 include_once('classes/tablereservation.php');
-include_once('adminheader.php');
+include_once("adminnavbar.php");
 
 $sql = new Table;
 $result = $sql->listreserve();
@@ -9,9 +10,31 @@ $result = $sql->listreserve();
 // echo "<pre>";
 ?>
 
-<div class="container">
-	<div class="row">
-		<h2 class="mt-5">List of table reserved</h2>
+<div class="container-fluid">
+	<div class="row text-center" style="background-color: #e8a392; color:#fff">
+	<h2 class="mt-5">List of table reserved</h2>
+	</div>
+	<div class="row mb-5">
+		<div class="col-md-3 mt-5">
+			<div class="list-group">
+				<a href="addproduct.php" class="list-group-item ">Add product</a>
+				<a href="listfood.php" class="list-group-item ">List available food</a>
+				<a href="admineditfood.php" class="list-group-item ">Edit product</a>
+				<a href="listtablepreserve.php" class="list-group-item ">List of reserved table</a>
+				<a href="admineditreserve2.php" class="list-group-item ">Edit reserved table</a>
+				<a href="insertcategory.php" class="list-group-item ">Insert new food category</a>
+				<a href="" class="list-group-item ">Delivery</a>
+				<a href="logoutfood.php" class="list-group-item ">Log out</a>
+			</div>
+		</div>
+	</div>
+	<div class="row mt-3">
+
+		
+
+		
+
+		<div class="col">
 		<table class="table table-striped ">
 			<thead class="table-dark">
 				<tr>
@@ -59,5 +82,6 @@ $result = $sql->listreserve();
 				
 			</tbody>
 		</table>
+		</div>
 	</div>
 </div>

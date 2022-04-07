@@ -1,5 +1,6 @@
 <?php 
-include_once("adminheader.php");
+
+include_once("adminnavbar.php");
 
 include_once("classes/fooduser.php");
 $objcat= new Food;
@@ -19,9 +20,11 @@ $output=$objcat->findFood($id);
         <a href="addproduct.php" class="list-group-item ">Add product</a>
         <a href="listfood.php" class="list-group-item ">List available food</a>
         <a href="admineditfood.php" class="list-group-item ">Edit product</a>
-        <a href="" class="list-group-item ">Order</a>
+        <a href="listtablepreserve.php" class="list-group-item ">List of reserved table</a>
+        <a href="admineditreserve2.php" class="list-group-item ">Edit reserved table</a>
+        <a href="insertcategory.php" class="list-group-item ">Insert new food category</a>
         <a href="" class="list-group-item ">Delivery</a>
-        <a href="adminlogoutfood.php" class="list-group-item ">Log out</a>
+        <a href="logoutfood.php" class="list-group-item ">Log out</a>
       </div>
       </div>
       <div class="col-md-6 mb-4">

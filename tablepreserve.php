@@ -1,14 +1,32 @@
 <?php
-session_start();
 
-include_once('navbar.php');
-$id= $_SESSION['id'];
+include_once('functionnavbar.php');
+$id= $_SESSION['myid'];
 
 
 include_once("classes/tablereservation.php");
 //include_once("adminheader.php");
+	
+?>
+<body style="background-color: #FAF9F6 ">
+<div class="container-fluid text-center">
+	<div class="row" style="background-color: #e8a392; color:#fff">
+		<h1 class="mt-4 mb-3" >Reserve a table</h1>
+	</div>
+</div>
+<div class="container-fluid">
+	<div class="row">
+		
+	</div>	
+	<div class="row">
+		<div class="col-md-3">
+		</div>
+		<div class="col-md-6">
 
-$sql = new Table;
+			<!--start php-->
+				<?php
+
+					$sql = new Table;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -40,14 +58,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	if(empty($guest)){
 		$error[]='Please input number of people';
 	}
-	if(empty($reservetype)){
-		$error[] = 'Please input your type';
-	}
+	
 	if(empty($reservedate)){
 		$error[]='Please date field is empty';
 	}
 	if(empty($reservetime)){
-		$error[]='Please date field is empty';
+		$error[]='Please time field is empty';
 	}
 	if(empty($reservetype)){
 		$error[]='Please type field is empty';
@@ -57,34 +73,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	if(!empty($error)){
 		echo "<ul class='alert alert-danger'>";
 		foreach ($error as $key => $value) {
-			echo "<li>$value</li>" ;
+			echo "<li>$value</li>" ;	
 		}
 		echo "</ul>";
 	}else{
 		$result = $sql->ckeckEmailAddress($email);
 		if($result == true){
-			echo " Email already exist";
+			echo " <span class='text-danger'>Email already exist</span>";
 		}
 		else{
 			$output = $sql->inserttable($firstname, $lastname, $phone, $email,$guest,$reservetype, $reservedate, $reservetime,$reservedspecial, $id);
+
 			echo $output;
 			
-			echo "<span class='text-danger'>Table has been reserved. Hurray!!!</span>";
-		exit;
+			echo "<span class='alert alert-danger'>Table has been reserved. Hurray!!!</span>";
+			//header("Location: tablepreserve.php");
+		//exit;
 		}
 
 	}
-}
-	
-?>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-4">
-		</div>
-		<div class="col-md-4">
+}?>
+
+
+			<!--start php-->
 			<div class="card mt-5">
-				<div class="card-header">
-					Reserve a table
+
+				<div class="card-header">	
 				</div>
 				<div class="card-body">
 					<form action="" method="post">
@@ -99,18 +113,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 						<label>Any special request</label>
 						<textarea class="form-control mb-4" name="special"></textarea>
 						<!-- <select name="status" class="form-control">
-							<option name=''>--</option>
 							<option name='status'>New</option>
 							<option name='status'>Cancelled</option>
-							<option name='status'>Completed</option>
 						</select> -->
-						<input type="submit" class="form-control mb-4 text-light" name="submit" style="background-color: red;">
+						<input type="submit" class="form-control mb-4 text-light" name="submit" style="background-color: #e8a392;">
 						
 					</form>
 				</div>
 			</div>	
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
+			
+			<button class="btn btn-primary mt-3">Cancel reservation</button>
+		</div>
 		</div>
 	</div>	
 </div>

@@ -1,6 +1,6 @@
 <?php
 //include_once("classes/user.php");
-include_once("navbar.php");
+include_once("navbarheader.php");
 
 ?>
 
@@ -8,6 +8,15 @@ include_once("navbar.php");
 <section id="foodsearch" >
 	<div class="overlay">
 		<div class="container-fluid ">
+
+			<!--start row-->
+				<!-- <div class= "row">
+					<div class="col-md-12 p-3 font-weight-bold text-center" style="background-color: rgb(255,153,0)">
+						Are you a new user? Please sign up to order  <i class="fa-solid fa-bowl-hot"></i>food and make table reservation
+					</div>
+				</div>	 -->	
+
+			 <!--start row-->
 			<div class="row">
 				<div class="col words">
 					<div class="maintext text-center text-light">
@@ -16,6 +25,9 @@ include_once("navbar.php");
 						<h3>Order from us where you get treated as a king</h3>
 						<button class="btn primary "><a href='menudata.php'>SEE MENU AND ORDER</a></button>
 						<button class="btn secondary ml-3"><a href="tablepreserve.php">TABLE PRESERVATION</a></button>
+						<div class="col-md-12 p-3 font-weight-bold text-center" style="background-color: rgb(255,153,0)">
+						Are you a new user? Please sign up to order  <i class="fa-solid fa-bowl-hot"></i>food and make table reservation
+					</div>
 					</div>
 				</div>
 			</div>
@@ -72,7 +84,7 @@ include_once("navbar.php");
 						<p>Food price: #2000</p>
 						<p class="small">Fried rice with well garnished chicken</p>
 
-						<a href="#" class="btn btnsecondary orderbutton">Order Now!</a>
+						<!-- <a href="#" class="btn btnsecondary orderbutton">Order Now!</a> -->
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -87,7 +99,7 @@ include_once("navbar.php");
 						<p>Food price: #2000</p>
 						<p class="small">Jollof rice with well garnished chicken</p>
 
-						<a href="" class="btn btnsecondary orderbutton">Order Now!</a>
+						<!-- <a href="" class="btn btnsecondary orderbutton">Order Now!</a> -->
 					</div>
 					<div class="clearfix"></div>
 
@@ -102,7 +114,7 @@ include_once("navbar.php");
 						<p>Food price: #2000</p>
 						<p class="small">Scrumptuous eba with egusi soup garnished with stock fish</p>
 
-						<a href="" class="btn btnsecondary orderbutton">Order Now!</a>
+						<!-- <a href="" class="btn btnsecondary orderbutton">Order Now!</a> -->
 					</div>
 					<div class="clearfix"></div>
 					
@@ -116,7 +128,7 @@ include_once("navbar.php");
 						<p>Food price: #2000</p>
 						<p class="small">Fluffy pounded yam with ogbono soup well-garnished with crayfish</p>
 
-						<a href="login.php" class="btn btnsecondary orderbutton">Order Now!</a>
+						<!-- <a href="login.php" class="btn btnsecondary orderbutton">Order Now!</a> -->
 					</div>
 					<div class="clearfix"></div>
 					
@@ -131,7 +143,7 @@ include_once("navbar.php");
 						<p>Food price: #2000</p>
 						<p class="small">Yummy! Made with alot of meat </p>
 
-						<a href="login.php" class="btn btnsecondary orderbutton">Order Now!</a>
+						<!-- <a href="login.php" class="btn btnsecondary orderbutton">Order Now!</a> -->
 					</div>
 					<div class="clearfix"></div>
 
@@ -146,7 +158,7 @@ include_once("navbar.php");
 						<p>Food price: #2000</p>
 						<p class="small">Bean locally called 'ewa agoyin' with soft bread</p>
 
-						<a href="login.php" class="btn btnsecondary orderbutton">Order Now!</a>
+						<!-- <a href="login.php" class="btn btnsecondary orderbutton">Order Now!</a> -->
 					</div>
 					<div class="clearfix"></div>
 
@@ -228,9 +240,11 @@ include_once("navbar.php");
 
 	<!-- -->
 	<!-- JS FILES -->
-	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js">	
+	</script>
 	<script type="text/javascript" src="js/popper.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script src="//code.tidio.co/up88jsdec9ymstn9dg8tgkf4v3zrb9t8.js" async></script>
 
 	<script type="text/javascript">
 		$(document).ready(function(){

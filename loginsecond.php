@@ -1,6 +1,13 @@
 <?php
-	include_once("frontheader.php");
+// if(!isset($_SESSION['tyuiojh'])){
+
+// header("Location: index.php?msg=Please sign up to continue ");
+// exit;}
+
+
+	include_once("navbarheader.php");
 	include_once("classes/user.php");
+  
 
 ?>
 
@@ -30,7 +37,11 @@
            //create user object -->
 
           $obj = new User;
-
+session_start();
+          
+          if (isset($_SESSION['myid'])) {
+    $myid=$_SESSION['myid'];
+  }
            //to access login method -->
           $message = $obj->login($_POST['email'], $_POST['password']);
           // var_dump($message);
@@ -40,7 +51,8 @@
             //redirect to dashboard.php
             //session_start();
             //$id = $_SESSION['id'];
-            header("Location: userdashboard.php");
+            //header("Location: userdashboard.php?user=$myid");
+            header("Location: index.php");
             exit;
         	}
 

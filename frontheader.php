@@ -56,3 +56,7 @@
 
 </section>
 	<!-- The end of navbar-->
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/popper.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>

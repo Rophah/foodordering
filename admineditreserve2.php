@@ -1,5 +1,6 @@
 <?php 
-include_once("adminheader.php");
+
+include_once("adminnavbar.php");
 
 include_once("classes/tablereservation.php");
 $objcat= new Table;
@@ -7,10 +8,12 @@ $objcat= new Table;
 
 $id=$_GET['id'];
 $output=$objcat->findtablereserve($id);
-echo "<pre>";
-print_r($output);
-echo "</pre>";
-//echo ($output[0]['phone']);
+
+// echo "<pre>";
+//       print_r($output);
+//       echo "</pre>";
+      
+
 ?>
 
 <!-- Page Content -->
@@ -22,9 +25,11 @@ echo "</pre>";
         <a href="addproduct.php" class="list-group-item ">Add product</a>
         <a href="listfood.php" class="list-group-item ">List available food</a>
         <a href="admineditfood.php" class="list-group-item ">Edit product</a>
-        <a href="" class="list-group-item ">Order</a>
+        <a href="listtablepreserve.php" class="list-group-item ">List of reserved table</a>
+        <a href="listtablepreserve.php" class="list-group-item ">Edit reserved table</a>
+        <a href="insertcategory.php" class="list-group-item ">Insert new food category</a>
         <a href="" class="list-group-item ">Delivery</a>
-        <a href="adminlogoutfood.php" class="list-group-item ">Log out</a>
+        <a href="logoutfood.php" class="list-group-item ">Log out</a>
       </div>
       </div>
       <div class="col-md-6 mb-4">
@@ -45,16 +50,21 @@ echo "</pre>";
     $specialrequest = $_POST['specialrequest'];
     $status = $_POST['status'];
 
-		if(empty($firstname) || empty($lastname) || empty($phone)||empty($email) || empty($guest) || empty($types) || empty($reservedate) || empty($reservetime) || empty($specialrequest) || empty($status)){
+		if(empty($firstname) || empty($lastname) || empty($phone)||empty($email) || empty($guest) || empty($types) || empty($reservedate) || empty($reservetime) || empty($specialrequest) || empty($status) ){
 			echo "<span class='text-danger'>Kindly Complete all Fields</span>";
 		}else{
 			include_once("classes/fooduser.php");
 			$objfood=new Table;
-			$result=$objfood->updateTable($firstname,$lastname,$phone,$email,$guest, $types,$reservedate,$reservetime,$specialrequest,$status);
+			$result=$objfood->updateTable($firstname,$lastname,$phone,$email,$guest, $types,$reservedate,$reservetime,$specialrequest,$status, $_POST['idtablereservation']);
+
+      // echo "<pre>";
+      // print_r($result);
+      // echo "</pre>";
+      // exit;
 			if($result==true){
-				echo "<span class='text-danger'>Food Updated Sucessfully</span>";
+				echo "<span class='text-danger'>Table reservation Updated Sucessfully</span>";
 			}else{
-				echo "<span class='text-danger'>Could Not add Food</span>";
+				echo "<span class='text-danger'>Could Not Update table reservation</span>";
 			}
 
 		}
@@ -98,9 +108,13 @@ echo "</pre>";
           <label>Any special request:</label>
           <input type="text" name="specialrequest" class="form-control" value="<?php if(isset($output[0]['specialrequest'])){ echo $output[0]['specialrequest'];} ?>">
         </div>
+        <div>
+          
+          <input type="hidden" name="idtablereservation" class="form-control" value="<?php if(isset($output[0]['idtablereservation'])){ echo $output[0]['idtablereservation'];} ?>">
+        </div>
       	<div>
           <label>Status of reservation:</label>
-      		<select name="status" class="form-control mt-3">   
+      		<select name="status" class="form-control mt-3" value="if(isset($value[0]['status'])){echo $value[0]['status']}">   
             <option name="status" value="new">New</option>
             <option name="status" value="cancelled">Cancelled</option>
             <option name="status" value="completed">Completed</option>

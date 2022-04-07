@@ -1,5 +1,5 @@
 <?php
-//include_once("constants.php");
+include_once("constants.php");
 
 class User{
 
@@ -10,8 +10,8 @@ class User{
 	public $dbconnect;
 
 	public function __construct(){
-		//$this->dbconnect=new mysqli(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-		$this->dbconnect=new mysqli("localhost","root","","foodordering");
+		$this->dbconnect=new mysqli(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+		//$this->dbconnect=new mysqli("localhost","root","","foodordering");
 		if ($this->dbconnect->connect_error){
 			die("Connection error: ".$this->dbconnect->connect_error);
 		}
@@ -20,9 +20,9 @@ class User{
 
 	public function signup($fname,$lname,$email,$dob,$phone,$pass,$confirmpass){
 
-		$pass = md5($pass);
-		$confirmpass = md5($confirmpass);
-		$sql = "INSERT INTO user(firstname,lastname,emailaddress,dateofbirth,phonenumber,password,confirmpassword) VALUES('$fname','$lname','$email','$dob','$phone','$pass','$confirmpass')";
+		$password=password_hash($pass, PASSWORD_DEFAULT);
+		$confirmpassword=password_hash($confirmpass, PASSWORD_DEFAULT);
+		$sql = "INSERT INTO user(firstname,lastname,emailaddress,dateofbirth,phonenumber,password,confirmpassword) VALUES('$fname','$lname','$email','$dob','$phone','$password','$confirmpass')";
 		
 		$result = $this->dbconnect->query($sql);
 
@@ -38,7 +38,7 @@ class User{
 			$_SESSION['email'] = $email;
 			$_SESSION['lastname']=$lname;
 			$_SESSION['firstnme'] = $fname;
-			//$_SESSION['orptiyek'] = "onlineordering";
+			$_SESSION['tyuiojh'] = "useronlineordering";
 
 			//header("Location: http://localhost/onlineordering/ ");
 			//exit;
@@ -60,37 +60,33 @@ class User{
 	}
 
 	public function login($email,$password){
-		$password = md5($password);
-		$sql = "SELECT * FROM user WHERE emailaddress = '$email' && password = '$password' ";
+		$sql = "SELECT * FROM user WHERE emailaddress = '$email'";
 
 		// var_dump($sql);
 		// exit;
 		$result = $this->dbconnect->query($sql);
+		if($result->num_rows == 1){
+			$row=$result->fetch_assoc();
+			$confirm=password_verify($password, $row['password']);
+			if ($confirm) {
+			session_start();
+			$_SESSION['myid']= $row['idcustomer'];
+			$_SESSION['mylogchecker'] = "Rt_0_0_rab";
+			$_SESSION['email'] = $email;
+			$_SESSION['lastname']=$row['lastname'];
+			
+			return true;
+			}
 
-		if($this->dbconnect->error){
-			return "Oops there is a connection error";
-		}
-
-		$rows= $result->fetch_assoc();
-		if($result->affected_rows == 1){
-			$_SESSION['id']= $rows['idcustomer'];
-			//var_dump($_SESSION['id']);
-			exit;
-			return $rows;
-		} else{
-			return $rows;
+		 else{
+			return false;
+			}
 		}
 
 				
 	}
 
-
-	
-}
-
-
-
-
+}	
 
 
 

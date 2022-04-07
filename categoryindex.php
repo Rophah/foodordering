@@ -1,6 +1,6 @@
 <?php
 include_once('classes/fooduser.php');
-include_once('adminheader.php');
+include_once('functionnavbar.php');
 
 $sql = new Food;
 $res = $sql->categoryindexpage();

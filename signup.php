@@ -1,5 +1,5 @@
 <?php
-  include_once("navbar.php");
+  include_once("navbarheader.php");
   include_once("classes/user.php");
   
 ?>
@@ -63,7 +63,7 @@
 
             $output = $newobj->signup($_POST['fname'], $_POST['lname'], $_POST['email'] , $_POST['dob'] ,$_POST['phone'], $_POST['password'], $_POST['samepassword']);
             echo $output;
-            header("Location: login.php");
+            header("Location: loginsecond.php");
             }
           }
         }
